@@ -1,5 +1,5 @@
 
-name := "movie"
+name := "assignment"
 
 version := "0.1"
 
@@ -13,5 +13,4 @@ libraryDependencies += "org.scalatest" %% "scalatest-funsuite" % "3.2.5" % "test
 libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
 
 
-
-assemblyJarName in assembly := "movie-1.0.jar"
+assemblyJarName in assembly := "assignment-1.0.jar"
