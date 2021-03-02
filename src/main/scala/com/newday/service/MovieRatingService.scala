@@ -15,7 +15,9 @@ class MovieRatingService(session: SparkSession) {
   def process(): Unit = {
     val movie = ReaderService.read(session, MovieService.writeFormatter).as[Movie]
     val rating = ReaderService.read(session, RatingService.writeFormatter).as[Rating]
-    WriterService.write(getMovieByRatings(session, movie, rating), MovieRatingService.writeFormatter);
+    val movieRatings = getMovieByRatings(session, movie, rating);
+    movieRatings.show(10);
+    WriterService.write(movieRatings, MovieRatingService.writeFormatter);
     getUsersFavourite(session, movie, rating).show(10)
   }
 }

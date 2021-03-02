@@ -19,7 +19,7 @@ class MovieRatingServiceTest extends AnyFunSuite with BeforeAndAfterAll {
 
   test("getMovieByRatings") {
     val sparkSession = SparkSession.builder
-      .master(Config.getProperty(MASTER, "local(*)"))
+      .master(Config.getProperty(MASTER, "local[*]"))
       .appName("Something to do with movies")
       .config("spark.ui.enabled", true)
       .getOrCreate();
@@ -53,4 +53,5 @@ class MovieRatingServiceTest extends AnyFunSuite with BeforeAndAfterAll {
     assert(movieRatings == movieRating.collect().toSeq)
   }
 
+  override protected def beforeAll(): Unit = Config.init(this.getClass.getResource("/env.properties").toString)
 }

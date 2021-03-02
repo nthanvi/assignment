@@ -9,15 +9,16 @@ import org.apache.spark.sql.SparkSession
 // Todo Exception Handling
 // Todo Externalize configuration
 // Todo Comments and Logging
-// command to run ./spark-submit  --class com.newday.Launcher --master local[*] /Users/nthanvi/movie/target/scala-2.12/assignment-1.0.jar
-// keep files in same dir as spark-submit
 
 object Launcher {
   def main(args: Array[String]) = {
+    Config.init(args(0))
+
     val sparkSession = SparkSession.builder
-      .master(Config.getProperty(MASTER, "local[*]"))
       .appName("Something to do with movies")
       .getOrCreate();
+    // Todo  check arguments etc
+    print("Running with " + args(0));
     SparkContext.getOrCreate().setLogLevel("ERROR")
     new MovieService(sparkSession).process();
     new RatingService(sparkSession).process();
